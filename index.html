@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Please lock in for the tests</title>
+  <style>
+    :root{
+      --bg:#f7fbff;
+      --card:#ffffff;
+      --accent:#1e88e5;
+      --muted:#555;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg),#eef6ff 60%);
+      color:#111;
+      line-height:1.45;
+      display:flex;
+      min-height:100vh;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .card{
+      max-width:760px;
+      width:100%;
+      background:var(--card);
+      border-radius:12px;
+      box-shadow:0 8px 30px rgba(20,30,60,0.08);
+      padding:28px;
+      border:1px solid rgba(30,40,60,0.04);
+    }
+    header h1{
+      margin:0 0 8px 0;
+      font-size:1.6rem;
+      letter-spacing:0.2px;
+      color:var(--accent);
+    }
+    p.lead{
+      margin:0 0 18px 0;
+      font-weight:600;
+      color:#153d63;
+    }
+    section h2{
+      margin-top:16px;
+      margin-bottom:8px;
+      font-size:1.05rem;
+    }
+    ul{margin:8px 0 0 20px}
+    .tips{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .tip{
+      background:#f3f9ff;
+      padding:12px;
+      border-radius:8px;
+      flex:1 1 200px;
+      border:1px solid rgba(30,40,60,0.03);
+    }
+    footer{
+      margin-top:18px;
+      font-size:0.95rem;
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+    }
+    .cta{
+      background:var(--accent);
+      color:white;
+      border:none;
+      padding:10px 14px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    @media (max-width:560px){
+      .card{padding:18px}
+      header h1{font-size:1.3rem}
+    }
+  </style>
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="page-title">
+    <header>
+      <h1 id="page-title">GUYS! Please lock in for the tests</h1>
+      <p class="lead">Short-term focus today leads to long-term gains tomorrow. Here's why locking in matters — and how to do it well.</p>
+    </header>
+
+    <section aria-labelledby="why-title">
+      <h2 id="why-title">Why studying is important</h2>
+      <ul>
+        <li><strong>Understand, don't memorize:</strong> Studying builds understanding that helps you apply knowledge in new situations — tests, projects, and real life.</li>
+        <li><strong>Reduce stress:</strong> Regular preparation prevents last-minute cramming and lowers anxiety before the exam.</li>
+        <li><strong>Better retention:</strong> Spaced practice helps move information from short-term to long-term memory.</li>
+        <li><strong>Opportunities:</strong> Good test performance opens doors — classes, scholarships, and confidence for future challenges.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="how-title">
+      <h2 id="how-title">How to lock in (practical tips)</h2>
+      <div class="tips" role="list">
+        <div class="tip" role="listitem">
+          <strong>Plan small sessions</strong>
+          <p style="margin:.5rem 0 0 0">Study 25–45 minute focused blocks with short breaks (Pomodoro). It's easier to stay consistent than to do one marathon session.</p>
+        </div>
+        <div class="tip" role="listitem">
+          <strong>Active practice</strong>
+          <p style="margin:.5rem 0 0 0">Do problems, explain concepts aloud, quiz yourself — active recall beats passive review.</p>
+        </div>
+        <div class="tip" role="listitem">
+          <strong>Prioritize weak spots</strong>
+          <p style="margin:.5rem 0 0 0">Spend slightly more time on topics you struggle with instead of repeatedly re-reading what you already know.</p>
+        </div>
+        <div class="tip" role="listitem">
+          <strong>Mock tests</strong>
+          <p style="margin:.5rem 0 0 0">Simulate test conditions: time yourself, eliminate distractions, and practice with old exams if available.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        <small>Start small — one focused session now is better than promising a perfect plan tomorrow.</small>
+      </div>
+      <div>
+        <button class="cta" onclick="startSession()">Start a 25-minute session</button>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    function startSession(){
+      // quick in-browser 25-minute timer with a prompt
+      if (!confirm('Start a 25-minute focused study session now?')) return;
+      const end = Date.now() + 25 * 60 * 1000;
+      const timerWin = window.open('', '_blank', 'width=320,height=120');
+      if (!timerWin) {
+        alert('Allow popups for a simple timer, or just set a phone timer for 25 minutes.');
+        return;
+      }
+      timerWin.document.title = '25:00';
+      timerWin.document.body.style.fontFamily = 'Inter, system-ui, sans-serif';
+      timerWin.document.body.style.display = 'flex';
+      timerWin.document.body.style.justifyContent = 'center';
+      timerWin.document.body.style.alignItems = 'center';
+      timerWin.document.body.style.height = '100vh';
+      const el = timerWin.document.createElement('div');
+      el.style.fontSize = '28px';
+      el.style.fontWeight = '700';
+      timerWin.document.body.appendChild(el);
+
+      function update(){
+        const remaining = Math.max(0, end - Date.now());
+        const mins = Math.floor(remaining / 60000);
+        const secs = Math.floor((remaining % 60000) / 1000).toString().padStart(2,'0');
+        el.textContent = `${mins}:${secs}`;
+        if (remaining <= 0) {
+          clearInterval(iv);
+          timerWin.document.title = 'Done!';
+          el.textContent = 'Time’s up — take a short break!';
+          timerWin.alert('25-minute session finished. Great work — take a 5-minute break!');
+        }
+      }
+      update();
+      const iv = setInterval(update, 250);
+    }
+  </script>
+</body>
+</html>
